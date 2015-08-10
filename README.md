@@ -1,5 +1,6 @@
 # \#fr Projet Logiciel Supélec
-** Séquence 6 - 2014/2015 **
+**Séquence 6 - 2014/2015**
 
-On this projet you will found a functional SuperSprint game. It was developped as a Supelec engineering cursus project from nov. 2014 to feb. 2015.
-Eclipse was used as IDE software, so all file organization is based on this softare interface.
+A functional version [http://www.giantbomb.com/super-sprint/3030-2776/](SuperSprint)-like game.
+
+This project was developped as Supélec engineering cursus software project from Nov. 2014 to Feb. 2015.
