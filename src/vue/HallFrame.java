@@ -13,7 +13,7 @@ public class HallFrame extends JFrame implements Observer, ActionListener, ItemL
 	private static final long serialVersionUID = 1L;
 	@SuppressWarnings("rawtypes")
 	private JComboBox menuHall;
-	private JTable results; // la table des résultats
+	private JTable results; // la table des resultats
 	private MenuFrame menu;
 	HallOfFame hall;
 
@@ -30,12 +30,12 @@ public class HallFrame extends JFrame implements Observer, ActionListener, ItemL
 		for(m = 0; m < Circuit.numCirc; m++) {
 			stringTrack[m] = "Circuit "+Integer.toString(m+1);
 		}
-		
-		// les entrées du tableau
+
+		// les entrees du tableau
 		String[][] data = new String[HallOfFame.numResults][4];
 		String[][] tt = {{"Position", "Nom", "Temps", "Date"}};
 		String[] t = {"", "", "", ""};
-		
+
 		JTable title = new JTable(tt, t);
 		results = new JTable(data, t);
 		title.setPreferredSize(new Dimension(400,17));
@@ -43,16 +43,16 @@ public class HallFrame extends JFrame implements Observer, ActionListener, ItemL
 		title.setFont(title.getFont().deriveFont(Font.BOLD, 12));
 		results.setPreferredSize(new Dimension(400,160));
 		results.setEnabled(false);
-		
+
 		menuHall = new JComboBox(stringTrack);
 		menuHall.addItemListener(this);
 		menuHall.setSelectedIndex(1);
 		menuHall.setSelectedIndex(0);
-		
+
 		JButton closeButton = new JButton("Fermer");
-		
+
 		closeButton.addActionListener(this);
-		
+
 		SpringLayout layout = new SpringLayout();
 		Container contentPane = this.getContentPane();
 		panel.setLayout(layout);
@@ -64,21 +64,21 @@ public class HallFrame extends JFrame implements Observer, ActionListener, ItemL
 		layout.putConstraint(SpringLayout.NORTH, results, 20, SpringLayout.NORTH, title);
 		layout.putConstraint(SpringLayout.EAST , closeButton, (int) title.getPreferredSize().getWidth(), SpringLayout.WEST, title);
 		layout.putConstraint(SpringLayout.NORTH, closeButton, 10, SpringLayout.SOUTH, contentPane);
-		
+
 		panel.add(menuHall);
 		panel.add(title);
 		panel.add(results);
 		panel.add(closeButton);
 		this.add(panel);
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setSize((int) results.getPreferredSize().getWidth() + 25, 265);
 		setVisible(false);
 		setResizable(false);
 	}
-	
-	// cette fonction met à jour les données du Hall of Fame
+
+	// cette fonction met e jour les donnees du Hall of Fame
 	public void update(Observable obs, Object obj) {
 		int k;
 		Result r = null;
@@ -105,11 +105,11 @@ public class HallFrame extends JFrame implements Observer, ActionListener, ItemL
 		this.setVisible(false);
 		menu.showMenu();
 	}
-	
+
 	public void showHall() {
 		this.setVisible(true);
 	}
-	
+
 	public void hideHall() {
 		this.setVisible(false);
 	}

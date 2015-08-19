@@ -5,21 +5,21 @@ import java.util.TimerTask;
 import modele.Circuit;
 
 public class Temps extends TimerTask {
-	
+
 	private Controleur[] controle;
 	private Circuit circuit;
 	private Game game;
-	
+
 	public Temps(Controleur[] c, Circuit cc, Game g)
 	{
 		controle = c;
 		circuit = cc;
 		game = g;
-		System.out.println("La course a commancé avec " + controle.length + " voitures.");
+		System.out.println("La course a commance avec " + controle.length + " voitures.");
 		System.out.println(" ------------- ");
 	}
 
-	// a chaque instant, on doit actualiser tous les controleurs 
+	// a chaque instant, on doit actualiser tous les controleurs
 	@Override
 	public void run() {
 		circuit.mettreAJour();

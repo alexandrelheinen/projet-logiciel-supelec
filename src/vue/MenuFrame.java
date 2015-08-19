@@ -11,20 +11,20 @@ import modele.*;
 import controleur.*;
 
 public class MenuFrame extends JFrame implements ActionListener, ItemListener {
-	
+
 	private static final long serialVersionUID = 1L;
 	private static final int nLaps = 3; // always 3
-	
+
 	private HallFrame hallFrame;
 	private HallOfFame hall;
-	
+
 	// main menu variables
 	private JPanel mainPanel; // panel of the main menu
-	private JButton[] buttons; 
-	
+	private JButton[] buttons;
+
 	// race menu variables
 	private JPanel racePanel; // panel of the menu where we choose the race parameters
-		
+
 	// car panel variables (one to each player)
 	private JPanel[] carPanel;
 	@SuppressWarnings("rawtypes")
@@ -40,27 +40,27 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 
 	private JButton buttonOk; // button to start the race !
 	private JButton buttonMenu; // button to go back to the main menu.
-	
+
 	// status variables
 	private int selTrack;
 	private int[] selCar;
 	private int numPlayers;
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public MenuFrame() throws FileNotFoundException {
-		super("Super Sprint Supélec");
-		
+		super("Super Sprint Supelec");
+
 		// initialize the hall of fame
 		hallFrame = new HallFrame(this);
 		hall = new HallOfFame(hallFrame);
 		selCar = new int[2];
-		
+
 		// main menu
 		mainPanel = new JPanel();
 		JPanel imagePanel = new JPanel();
 		JLabel image = new JLabel(new ImageIcon("images/menu.png"));
 		imagePanel.add(image);
-		
+
 		// main menu's buttons
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(2,2));
@@ -78,7 +78,7 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 		// main menu
 		mainPanel.add(imagePanel);
 		mainPanel.add(buttonPanel);
-		
+
 		// race menu
 		racePanel = new JPanel();
 		carPanel = new JPanel[2];
@@ -86,14 +86,14 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 		carStats = new JProgressBar[2][3];
 		carIcon = new JLabel[2];
 		trackPanel = new JPanel();
-		
+
 
 		// creates every variable twice
 		for (k = 0; k < 2; k++) { // k is the player's number
 			// the car's menu, numCars options
 			String[] stringCar = new String[Voiture.numCars];
 			for (m = 0; m < Voiture.numCars; m++) {
-				stringCar[m] = "Modèle "+Integer.toString(m+1);
+				stringCar[m] = "Modele "+Integer.toString(m+1);
 			}
 			menuCar[k] = new JComboBox(stringCar);
 			menuCar[k].setBackground(Color.WHITE);
@@ -101,16 +101,16 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 			menuCar[k].setName("car"+Integer.toString(k+1));
 			carIcon[k] = new JLabel();
 			// end of the intern components (labels and menus)
-			
+
 			// the car panel itself
 			carPanel[k] = new JPanel();
-			carPanel[k].setLayout(new BoxLayout(carPanel[k],BoxLayout.Y_AXIS));	// 
+			carPanel[k].setLayout(new BoxLayout(carPanel[k],BoxLayout.Y_AXIS));	//
 			carPanel[k].add(new JLabel("Player " + Integer.toString(k+1)));		// player identifier
 			carPanel[k].add(menuCar[k]);										// the menu
 			carPanel[k].add(carIcon[k]);										// the icon
 			JPanel panelStats = new JPanel();									// a specific panel to the stats that will be shown
 			panelStats.setLayout(new GridLayout(3,2));
-			
+
 			String[] stats = {"Acceleration  ", "Vitesse Max.  ", "Tenue de Route  "}; // attributes' names
 			// each attribute will have a unique Label
 			int[][] limits = {{100,250},{200,400},{30,60}}; // the visual limits to each status progress bar, defined as convenient
@@ -127,7 +127,7 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 			// ends by add the panel at the race panel
 			racePanel.add(carPanel[k]);
 		}
-		
+
 		// track menu and its other components
 		String[] stringTrack = new String[Circuit.numCirc];
 		for(m = 0; m < Circuit.numCirc; m++) {
@@ -145,25 +145,25 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 		trackPanel.add(trackIcon);
 		menuTrack.setSelectedIndex(1);
 		menuTrack.setSelectedIndex(0);
-		
+
 		// start button
 		buttonOk = new JButton("C'est parti !");
 		buttonOk.setMnemonic(10);
 		buttonOk.addActionListener(this);
 		buttonOk.setPreferredSize(new Dimension(100,60));
-		
+
 		// menu button
 		buttonMenu = new JButton("Menu principal");
 		buttonMenu.setMnemonic(11);
 		buttonMenu.addActionListener(this);
 		buttonMenu.setPreferredSize(new Dimension(120,30));
-		
-		
+
+
 		// add the other components
 		racePanel.add(trackPanel);
 		racePanel.add(buttonOk);
 		racePanel.add(buttonMenu);
-		
+
 		// organize the panel's layout
 		SpringLayout layout = new SpringLayout();
 		Container contentPane = this.getContentPane();
@@ -178,8 +178,8 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 		layout.putConstraint(SpringLayout.SOUTH, buttonOk, 90, SpringLayout.SOUTH, carPanel[0]);
 		layout.putConstraint(SpringLayout.WEST, buttonMenu, 252, SpringLayout.EAST, contentPane);
 		layout.putConstraint(SpringLayout.SOUTH, buttonMenu, 140, SpringLayout.SOUTH, carPanel[0]);
-		
-		
+
+
 		// general configurations
 		this.add(racePanel);
 		this.setMainMenu();
@@ -187,7 +187,7 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 		setIconImage(ic.getImage());						// the windows' icon
 		mainPanel.setBackground(Color.BLACK);
 		imagePanel.setBackground(Color.BLACK);
-		
+
 		// standard definitions
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
@@ -196,9 +196,9 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 		menuCar[0].setSelectedIndex(1);
 		menuCar[0].setSelectedIndex(0);
 		menuCar[1].setSelectedIndex(1);
-		menuCar[1].setSelectedIndex(0);	
+		menuCar[1].setSelectedIndex(0);
 	}
-	
+
 	// this function sets the main menu at the frame
 	private void setMainMenu() {
 		this.remove(racePanel);
@@ -206,7 +206,7 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 		this.setSize(430,380);
 		this.repaint();
 	}
-	
+
 	// sets the race menu depending on the number of players that will play
 	private void setRaceMenu(int numPlayers) {
 		// disables the player two's menu if the game is for only one player
@@ -226,12 +226,12 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 	public void showMenu() {
 		this.setVisible(true);
 	}
-	
+
 	// treat the buttons of the menus (main and race)
 	public void actionPerformed(ActionEvent event) {
 		JButton button = (JButton) event.getSource();
 		int b = button.getMnemonic();
-		
+
 		switch (b) {
 			case 0: this.setRaceMenu(1); // one player
 				break;
@@ -239,22 +239,22 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 				break;
 			case 2: hallFrame.showHall(); // shows hall of fame
 				break;
-			case 3:	String message = 	"SUPER SPRINT SUPÉLEC\n" +
+			case 3:	String message = 	"SUPER SPRINT SUPeLEC\n" +
 										"_______________________________________\n" +
-										"INFORMATIONS GÉNÉRALES : \n\n" +
-										"Projet Logiciel 2014/2015 - Séq. 6\n" +
+										"INFORMATIONS GeNeRALES : \n\n" +
+										"Projet Logiciel 2014/2015 - Seq. 6\n" +
 										"Alexandre LOEBLEIN HEINEN & Gautier SHARPIN\n" +
 										"Version de 14.01.14\n" +
 										"_______________________________________\n" +
 										"COMMANDES : \n\n" +
 										"Pour commander les voitures, merci d'utiliser \n" +
-										"les flèches directionnelles pour le joueur 1  \n" +
+										"les fleches directionnelles pour le joueur 1  \n" +
 										"et les touches ASDW pour le joueur 2.\n" +
 										"_______________________________________\n" +
-										"Le nombre de tours est toujours fixé à 3.";
+										"Le nombre de tours est toujours fixe e 3.";
 					JOptionPane.showMessageDialog(null, message); // shows some informations about the software
 				break;
-			case 10: this.setVisible(false); // LET'S THE RACE START! 
+			case 10: this.setVisible(false); // LET'S THE RACE START!
 					this.setMainMenu();
 					int[] models = new int[4];
 					int k;
@@ -262,7 +262,7 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 					for (k = 0; k < numPlayers; k++) {
 						models[k] = selCar[k];
 					}
-					// generate the computer's cars randomly 
+					// generate the computer's cars randomly
 					Random random = new Random();
 					for (k = numPlayers; k < 4; k++) {
 						models[k] = random.nextInt(4) + 1;
@@ -290,7 +290,7 @@ public class MenuFrame extends JFrame implements ActionListener, ItemListener {
 			int k = box.getSelectedIndex();
 			carIcon[n].setIcon(new ImageIcon("images/voiture"+Integer.toString(k+1)+".png"));
 			int[] stats = Voiture.donnees[k];
-			
+
 			int i;
 			for(i = 0; i < 3; i++) {
 				carStats[n][i].setValue(stats[i]);

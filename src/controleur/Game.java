@@ -21,11 +21,11 @@ public class Game {
 	private int numTours;
 	private int numCircuit;
 	private boolean running;
-	
+
 	public static int[][][] MAPS = {{{4,2,2,3},{1,7,7,1},{5,2,2,6}},
 																	{{4,3,7,7},{1,5,2,3},{5,2,2,6}},
 																	{{4,2,2,3},{1,7,4,6},{5,2,6,7}},
-																	{{4,3,4,3},{1,5,6,1},{5,2,2,6}}}; // on change apr�s, il faut d�finir � partir de "partie" quelle est la valeur de "map"
+																	{{4,3,4,3},{1,5,6,1},{5,2,2,6}}}; // on change apres, il faut definir e partir de "partie" quelle est la valeur de "map"
 
 	public Game (int[] modeles, int piste, int num, int numTours, HallOfFame hall) {
 		Controleur.resetPlayers();
@@ -35,12 +35,12 @@ public class Game {
 		this.hall = hall;
 		numPlayers = num;
 
-		game = new GameFrame("Super Sprint Sup�lec", modeles, map, piste);
+		game = new GameFrame("Super Sprint Supelec", modeles, map, piste);
 		controleur = new Controleur[modeles.length];
 		circuit = new Circuit(game, map);
 		circuit.startLine(piste);
 
-		// l� on cr�e "num" voitures control�es par le clavier ; les autres sont control�es par l'intelligence artificielle
+		// le on cree "num" voitures controlees par le clavier ; les autres sont controlees par l'intelligence artificielle
 		int k = 0;
 		while(k < modeles.length) {
 			if (k < num) {
@@ -78,9 +78,9 @@ public class Game {
 		if (c < numPlayers) {
 			hall.testResult(temps, numCircuit-1);
 		} else {
-			// si l'ordinateur gagne, �a ne sera jamais consid�r�
+			// si l'ordinateur gagne, ea ne sera jamais considere
 			hall.testResult(temps*1000.0, numCircuit-1);
-			JOptionPane.showMessageDialog(null, "L'ordinateur a gagn�.");
+			JOptionPane.showMessageDialog(null, "L'ordinateur a gagne.");
 		}
 		game.setVisible(false);
 		game.dispose();

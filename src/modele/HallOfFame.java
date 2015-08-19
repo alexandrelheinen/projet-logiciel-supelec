@@ -10,13 +10,13 @@ import vue.*;
 public class HallOfFame extends Observable {
 
 	public static final int numResults = 10;
-	
+
 	private Result[][] results;
 	private int lastChange;
-	
+
 	public HallOfFame(HallFrame frame) throws FileNotFoundException {
 		results = new Result[Circuit.numCirc][numResults];
-		// charge le Hall of Fame mémorisé
+		// charge le Hall of Fame memorise
 		try {
 			FileInputStream file = new FileInputStream("halloffame.dat");
 			ObjectInputStream input = new ObjectInputStream(file);
@@ -29,24 +29,24 @@ public class HallOfFame extends Observable {
 			file.close();
 			input.close();
 		} catch (Exception ex) {
-			// si impossibilité d'ouvrir le fichier, on crée un nouveau Hall of Fame
-			JOptionPane.showMessageDialog(null, ex.getMessage()+"\nUn nouveau Hall of Fame va être créé.");
+			// si impossibilite d'ouvrir le fichier, on cree un nouveau Hall of Fame
+			JOptionPane.showMessageDialog(null, ex.getMessage()+"\nUn nouveau Hall of Fame va etre cree.");
 			setNewHall();
 		}
 
 		// sets
 		this.addObserver(frame);
-		
+
 		// first update of the table
 		lastChange = 0;
 		this.setChanged();
 		this.notifyObservers();
 		frame.hideHall();
-		
+
 	}
-	
+
 	private void setNewHall() {
-		String[] noms = {"Paul", "Alexandre", "Chloé", "Nathan", "Raphaël", "Louise", "Arthur", "Emma", "Jules", "Amélie"};
+		String[] noms = {"Paul", "Alexandre", "Chloe", "Nathan", "Raphael", "Louise", "Arthur", "Emma", "Jules", "Amelie"};
 		int i, j;
 		for(i = 0; i < Circuit.numCirc; i++) {
 			for(j = 0; j < numResults; j++) {
@@ -72,7 +72,7 @@ public class HallOfFame extends Observable {
 	public Result getResult(int circ, int pos) {
 		return results[circ][pos];
 	}
-	
+
 	// teste si le resultat peut entrer dans le hall of fame
 	public void testResult(double temps, int circ) {
 		int k;
@@ -81,7 +81,7 @@ public class HallOfFame extends Observable {
 		for (k = numResults - 1; k >= 0; k--) {
 			try
 			{
-				test = results[circ][k].getTime();				
+				test = results[circ][k].getTime();
 			} catch (Exception e) {
 				test = 10E10;
 			}
@@ -96,7 +96,7 @@ public class HallOfFame extends Observable {
 			this.notifyObservers();
 		}
 	}
-	
+
 	public int getLastChange() {
 		return lastChange;
 	}
@@ -111,7 +111,7 @@ public class HallOfFame extends Observable {
 		}
 		lastChange = circ;
 		results[circ][num] = new Result(name, t);
-		
+
 		// stores new results in file
 		try{
             FileOutputStream file = new FileOutputStream("halloffame.dat");
@@ -127,10 +127,10 @@ public class HallOfFame extends Observable {
         } catch(Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-		
+
 		// shows the hall of fame
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+
 }
